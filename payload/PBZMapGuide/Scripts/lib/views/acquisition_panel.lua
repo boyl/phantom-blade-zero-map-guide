@@ -1,3 +1,5 @@
+local function create(t)
+ t=t or function(value)return value end
 local Panel={}
 Panel.__index=Panel
 function Panel.new(deps,map,events)
@@ -17,7 +19,7 @@ function Panel.new(deps,map,events)
  self.root:AddChild(self.label)
  self.more=deps.construct(deps.find('/Script/UMG.Button'),map)
  self.moreLabel=deps.construct(deps.find('/Script/UMG.TextBlock'),map);self.more:AddChild(self.moreLabel);self.root:AddChild(self.more)
- self.moreLabel:SetVisibility(3);self.moreLabel:SetText(deps.text('展开详情'))
+ self.moreLabel:SetVisibility(3);self.moreLabel:SetText(deps.text(t('展开详情')))
  if deps.theme then deps.theme:button(self.more);deps.theme:text(self.moreLabel,14)end
  self.scroll=deps.construct(deps.find('/Script/UMG.ScrollBox'),map)
  self.detailsBox=deps.construct(deps.find('/Script/UMG.SizeBox'),map)
@@ -63,7 +65,7 @@ function Panel:set(text,detail)
  self.layoutPasses=2
  self.label:SetText(self.deps.text(text));self.border:SetVisibility(4)
  self.detailsLabel:SetText(self.deps.text(detail or''));self.detailsBox:SetVisibility(1)
- self.more:SetVisibility(detail and 0 or 1);self.moreLabel:SetText(self.deps.text('展开详情'))
+ self.more:SetVisibility(detail and 0 or 1);self.moreLabel:SetText(self.deps.text(t('展开详情')))
  self.scroll:ScrollToStart()
  self:layout()
 end
@@ -72,7 +74,7 @@ function Panel:toggleDetails()
  self.expanded=not self.expanded
  self.layoutPasses=2
  self.detailsBox:SetVisibility(self.expanded and 0 or 1)
- self.moreLabel:SetText(self.deps.text(self.expanded and'收起详情'or'展开详情'))
+ self.moreLabel:SetText(self.deps.text(self.expanded and t('收起详情')or t('展开详情')))
  self:layout()
 end
 function Panel:updateDetail(detail)
@@ -81,7 +83,7 @@ function Panel:updateDetail(detail)
  self.detailsLabel:SetText(self.deps.text(detail or''))
  self.detailsBox:SetVisibility(self.expanded and 0 or 1)
  self.more:SetVisibility(detail and 0 or 1)
- self.moreLabel:SetText(self.deps.text(self.expanded and'收起详情'or'展开详情'))
+ self.moreLabel:SetText(self.deps.text(self.expanded and t('收起详情')or t('展开详情')))
  self:layout()
 end
 function Panel:isInteracting()return self.border:IsValid()and self.border:IsHovered()end
@@ -93,4 +95,7 @@ function Panel:clear()
  if self.receiver and self.receiver:IsValid()then self.receiver:RemoveFromParent()end
  if self.border and self.border:IsValid()then self.border:RemoveFromParent()end
 end
+Panel.withTranslator=create
 return Panel
+end
+return create()

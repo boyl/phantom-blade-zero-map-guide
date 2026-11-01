@@ -1,3 +1,5 @@
+local function create(t)
+ t=t or function(value)return value end
 -- All objects managed here belong to the Mod. Native slot groups are untouched.
 local View={}
 View.__index=View
@@ -71,7 +73,7 @@ function View:show(map,target,allowed,focus)
    local item={widget=widget,source=source,id='PBZMapGuide_Source_'..tostring(#self.items+1)}
    self.items[#self.items+1]=item
    widget.OwnMapID=self.deps.name(source.map_id)
-   widget:InitWidget(self.deps.text('获取处：'..entry.title),self.deps.name(item.id))
+   widget:InitWidget(self.deps.text(t('获取处：')..entry.title),self.deps.name(item.id))
    item.initialized=true
    widget:SetRenderScale({X=2,Y=2});widget:SetRenderOpacity(1);widget:SetVisibility(3)
    local image=widget.Image_29
@@ -85,7 +87,7 @@ function View:show(map,target,allowed,focus)
    item.slot:SetAlignment({X=0.5,Y=0.5});item.slot:SetSize({X=52,Y=52});item.slot:SetZOrder(49)
    local label=self.deps.construct(self.deps.find('/Script/UMG.TextBlock'),map)
    assert(label:IsValid(),'source label unavailable');item.label=label
-   label:SetText(self.deps.text('获取处：'..entry.title))
+   label:SetText(self.deps.text(t('获取处：')..entry.title))
    local font=label.Font;font.Size=18;label:SetFont(font)
    label:SetShadowColorAndOpacity({R=0,G=0,B=0,A=1});label:SetShadowOffset({X=2,Y=2})
    label:SetColorAndOpacity({SpecifiedColor={R=0.2,G=1,B=1,A=1},ColorUseRule=0})
@@ -108,4 +110,7 @@ function View:show(map,target,allowed,focus)
  if not ok then self:clear();error(message)end
  return #self.items,#other
 end
+View.withTranslator=create
 return View
+end
+return create()

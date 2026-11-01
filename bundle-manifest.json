@@ -1,11 +1,11 @@
 {
   "format": 1,
-  "bundleHash": "8bb859a8c6b05950d337cf3a99377976b93753b2f196b6260c14846bf1cfff24",
-  "payloadHash": "5617e0b867d66e0fa9079b1e9d9b2159e3a1150e06e79e464be81779657759b5",
+  "bundleHash": "821723952bc82f375b21f2ef0a485897f78d94eb1b03dfdb74f3729ca67ef8d5",
+  "payloadHash": "f42b86737a4c55f386510cb0871a42421c92c7f8d7608f21cb9c2596efca6c23",
   "files": [
     {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/acquisition_service.lua",
-      "sha256": "c2d3e3007f85f3efe463983062c73baebeeb3c94062b17a3fdafcda20ed0aa65"
+      "sha256": "021843751e82342a37f2774e9e95caac8fe98e87b1e129cce7c6a4aaec980400"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/live_map.lua",
@@ -60,8 +60,12 @@
       "sha256": "a7ca7053c7e72ddc09e01c874f97c886c3882cf4d7f0ba0116a0658f20403dc7"
     },
     {
+      "name": "payload/PBZMapGuide/Scripts/lib/adapters/native_language.lua",
+      "sha256": "64c2a702f52fa98d5925a56c09432118087f415f4490690b0a8a43e71b842b0e"
+    },
+    {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/native_lock_info.lua",
-      "sha256": "73fa0e34286aa5504d2d04b9ad7ed4bb8c3cb3d66a88620024663486d52b97c6"
+      "sha256": "e21123294793dc0aef12295552883e0e93137c4eb2dc291cfc85be643cacb1d4"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/native_loot.lua",
@@ -149,11 +153,15 @@
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/model/guide_presentation.lua",
-      "sha256": "ada0040faced66e652b77f6a51c5637db38234bbbe18e8d9ad74e5bb13dd7ba1"
+      "sha256": "c5561b3dd513776e81e23cce5aa18602e43d8d99d51bdb8bad0249f9d87ce770"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/model/guide_target.lua",
       "sha256": "c3cba02489dca56a8d215881ba1e1f5e329edaafc6f27f923067bc681e3652c7"
+    },
+    {
+      "name": "payload/PBZMapGuide/Scripts/lib/model/localization.lua",
+      "sha256": "e42144747550ee84c9fe0deeee6c44d9b8c70a6fc3a238164d5a2859ae38559d"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/model/map_geometry.lua",
@@ -205,23 +213,23 @@
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/runtime/native_candidate.lua",
-      "sha256": "7b8f9c43eacea64fafd22266f29141dec72b8860d6023e05245c059202ec3636"
+      "sha256": "3dae643d56ebec26e5c3656021e34528e7116ff8a57fb62dd266e5162c0a7277"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/views/acquisition_panel.lua",
-      "sha256": "2d9d96c77d6b8ede5bd3b6ca5a35e484b4924a6036bf09d08c4100ef90d80219"
+      "sha256": "d27c286bb6cb84a73de35c7e67b6d8c5d5c0ff760ef7f38b92d6ba8604990bfb"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/views/collection_panel.lua",
-      "sha256": "6172494ae16c43cf06f873f29b0fecffc400dff63589282e98968676ba50eb51"
+      "sha256": "001b29326bd6d90a1f0a83d6f8f73086bd5e7d160d30cd51adcb790a6de4fe77"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/views/ink_theme.lua",
-      "sha256": "fc469237c1ded7757d2976684f2eb53be4d8a0e15e9cd014e7195bd2b556891d"
+      "sha256": "ed861786e2b67dc436fbc1edd27b9aeddfa0000e8f66d8d3b0b7792498ba7567"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/views/source_markers.lua",
-      "sha256": "67366fbd490d27d049920a8958cd2e28a0d8d79a042fd234d08ec9ed59e27633"
+      "sha256": "99a08e6ec5c19adccfc1e16eeed6787368e8d6aedfdc72309986a3f472368257"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/main.lua",
@@ -229,7 +237,7 @@
     },
     {
       "name": "manifest.json",
-      "sha256": "f12fa19df73d2b4c94e7ff310c396cf45679a49ca5ad9bee480ef76fd9244f96"
+      "sha256": "1d81e5019c7b155e4a0c20338be651c115fbb6d806d168aeae30fee8e1aaaeda"
     },
     {
       "name": "install.ps1",
@@ -245,7 +253,11 @@
     },
     {
       "name": "README.md",
-      "sha256": "9a61ff1811abadabf2a134990f31e2f574ad1ee99882c5663126b1194ecc0432"
+      "sha256": "81095da3c3ff0103dec577fb87460bcf347edf1f93cb37f1903321f67cf60c60"
+    },
+    {
+      "name": "README.en.md",
+      "sha256": "61d5a8805bd65940ec5baa9095ce20b8d99c4dc0abdd4d1432ecf1db1c3af821"
     },
     {
       "name": "LICENSE",

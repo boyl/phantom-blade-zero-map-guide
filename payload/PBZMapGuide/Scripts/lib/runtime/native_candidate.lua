@@ -31,14 +31,17 @@ function Runtime.refreshRegion(state,markers,mapApi)
 end
 function Runtime.start(root,options)
  options=options or{}
+ local Language=dofile(root..'adapters/native_language.lua')
+ local locale=dofile(root..'model/localization.lua').new()
+ local t=locale.text
  local previousTarget=_G.PBZMapGuideCandidate and _G.PBZMapGuideCandidate.target
  if _G.PBZMapGuideCandidate then _G.PBZMapGuideCandidate.stop()end
  local Catalog=dofile(root..'adapters/native_catalog.lua')
  local Context=dofile(root..'adapters/native_context.lua')
  local Index=dofile(root..'model/source_index.lua')
  local Nearest=dofile(root..'model/nearest.lua')
- local Service=dofile(root..'adapters/acquisition_service.lua')
- local LockInfo=dofile(root..'adapters/native_lock_info.lua')
+ local Service=dofile(root..'adapters/acquisition_service.lua').withTranslator(t)
+ local LockInfo=dofile(root..'adapters/native_lock_info.lua').withTranslator(t)
  local Map=dofile(root..'adapters/live_map.lua')
  local Events=dofile(root..'adapters/native_click_latch.lua')
  local Hover=dofile(root..'adapters/native_hover.lua')
@@ -46,11 +49,11 @@ function Runtime.start(root,options)
  local Position=dofile(root..'model/panel_position.lua')
  local Preferences=dofile(root..'adapters/panel_preferences.lua')
  local Geometry=dofile(root..'model/map_geometry.lua')
- local Markers=dofile(root..'views/source_markers.lua')
+ local Markers=dofile(root..'views/source_markers.lua').withTranslator(t)
  local SourceLayer=dofile(root..'adapters/native_source_layer.lua')
  local MarkerPoints=dofile(root..'model/marker_points.lua')
- local Panel=dofile(root..'views/acquisition_panel.lua')
- local Presentation=dofile(root..'model/guide_presentation.lua')
+ local Panel=dofile(root..'views/acquisition_panel.lua').withTranslator(t)
+ local Presentation=dofile(root..'model/guide_presentation.lua').withTranslator(t)
  local Pinyin=dofile(root..'model/pinyin_search.lua').new(dofile(root..'data/pinyin_map.lua'))
  local Snapshot=dofile(root..'adapters/native_snapshot.lua')
  local Flower=dofile(root..'adapters/native_flower_counting.lua')
@@ -60,7 +63,7 @@ function Runtime.start(root,options)
  local Collection=dofile(root..'model/collection.lua')
  local CollectionLoader=dofile(root..'model/collection_loader.lua')
  local CollectionLayout=dofile(root..'model/collection_layout.lua')
- local CollectionView=dofile(root..'views/collection_panel.lua')
+ local CollectionView=dofile(root..'views/collection_panel.lua').withTranslator(t)
  local Rules=dofile(root..'model/rules.lua')
  local Theme=dofile(root..'views/ink_theme.lua')
  local FlowIndex=dofile(root..'adapters/native_flow_index.lua')
@@ -82,7 +85,8 @@ function Runtime.start(root,options)
  local EventService=dofile(root..'adapters/native_event_service.lua')
  local records,_,bells=Catalog.read(StaticFindObject('/Game/PBZContent/Maps/DT_MapItemData.DT_MapItemData'))
  local MapUnlocks=dofile(root..'adapters/native_map_unlocks.lua')
- local service=Service.new({index=Index.build(records),context=Context.get,bells=bells,nearest=Nearest.bell,read_unlocks=function(bell)return MapUnlocks.read(bell,FName)end})
+ local service=Service.new({index=Index.build(records),context=Context.get,bells=bells,nearest=Nearest.bell,read_unlocks=function(bell)return MapUnlocks.read(bell,FName)end,
+  resolve_text=function(text)return Language.resolve(text,StaticFindObject)end})
  local deps={find=StaticFindObject,construct=StaticConstructObject,name=FName,text=FText,
   phonetic=Pinyin,
   layout=function()return StaticFindObject('/Script/UMG.Default__WidgetLayoutLibrary')end,
@@ -115,9 +119,9 @@ function Runtime.start(root,options)
    read_subgraph=options.dialogue and options.dialogue.read_subgraph or nil,
    read_dialogue=options.dialogue and options.dialogue.read_line or nil,
    bind_choices=function(candidates,edges)return ChoiceBinding.bind(candidates,edges,function(text)
-    if text.cache~=''then return text.cache end
     local out={};local found=StaticFindObject('/Script/Engine.Default__KismetTextLibrary'):FindTextInLocalizationTable(text.namespace,text.key,out,'')
     if found then return out.OutText:ToString()end
+    if text.cache~=''then return text.cache end
    end)end})end,
   read_tag_sources=function()return sourceDiscovery:ensure()end,collect_hints=SourceHints.collect,
   describe_tag=function(tag)return Context.one('EventPipelineManager'):GetTagDescribe({TagName=FName(tag)}):ToString()end,
@@ -155,7 +159,7 @@ function Runtime.start(root,options)
    if enum:IsValid()then
     local key=enum:GetNameByValue(condition.state):ToString():match('([^:]+)$')
     local labels={InProcess='进行中',Completed='已完成',Finished='已结束',Failed='失败',NotStarted='未开始'}
-    if labels[key]then title=title..'（要求'..(condition.invert and'非'or'')..labels[key]..'）'end
+    if labels[key]then title=title..t('（要求')..(condition.invert and t('非')or'')..t(labels[key])..t('）')end
     -- New getters remain opt-in until their actual runtime signatures are verified.
     if options.questStates==true then
      local cacheKey=tostring(condition.quest)..'\0'..tostring(condition.branch)..'\0'..tostring(condition.group)
@@ -169,7 +173,7 @@ function Runtime.start(root,options)
       questStates[cacheKey]=current
      end
      local currentKey=current.status=='read'and enum:GetNameByValue(current.state):ToString():match('([^:]+)$')
-     title=title..' · 当前'..(labels[currentKey]or'状态待核实')
+     title=title..t(' · 当前')..t(labels[currentKey]or'状态待核实')
     end
    end
    return title
@@ -286,6 +290,9 @@ function Runtime.start(root,options)
  end
  local function attach(map)
   state.map=map;state.mapId=map.CurrentDisplayMapID:ToString()
+  locale:setLanguage(Language.read({find=StaticFindObject,report=deps.report}))
+  deps.language=locale.language
+  deps.report('Mod UI language='..locale.language)
   if options.theme~=false then deps.theme=Theme.new(deps)else deps.theme=nil end
   state.panel=Panel.new(deps,map,events)
   local receiver=StaticConstructObject(StaticFindObject('/Script/UMG.Button'),map)

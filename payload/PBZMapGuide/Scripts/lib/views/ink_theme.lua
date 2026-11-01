@@ -22,7 +22,9 @@ function Theme.new(deps)
   local object=deps.find('/Game/PBZContent/UI/Fonts/'..name..'.'..name)
   if object:IsValid()then return object end
  end
- self.bodyFont=font('ZH_FZKaiTi_Font');self.titleFont=font('ZH_ZiKuTangKuangShanKaiShuJF_Font')or self.bodyFont
+ if deps.language~='en'then
+  self.bodyFont=font('ZH_FZKaiTi_Font');self.titleFont=font('ZH_ZiKuTangKuangShanKaiShuJF_Font')or self.bodyFont
+ end
  return self
 end
 function Theme:font(font,size,title)
