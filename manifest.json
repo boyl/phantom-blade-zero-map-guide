@@ -1,0 +1,289 @@
+{
+  "format": 1,
+  "id": "PBZMapGuide",
+  "version": "0.4.0",
+  "entry": "Scripts/main.lua",
+  "files": [
+    {
+      "source": "src/adapters/acquisition_service.lua",
+      "target": "Scripts/lib/adapters/acquisition_service.lua",
+      "sha256": "c2d3e3007f85f3efe463983062c73baebeeb3c94062b17a3fdafcda20ed0aa65"
+    },
+    {
+      "source": "src/adapters/live_map.lua",
+      "target": "Scripts/lib/adapters/live_map.lua",
+      "sha256": "33645f71d5afd8eb8bd95e4e59a6f30004295cc478508b4e65814714e417c987"
+    },
+    {
+      "source": "src/adapters/native_branch_state.lua",
+      "target": "Scripts/lib/adapters/native_branch_state.lua",
+      "sha256": "38baa116554c9b8a84f08979f00278e1efb9aa83d48a6c46c319307803af6e6f"
+    },
+    {
+      "source": "src/adapters/native_catalog.lua",
+      "target": "Scripts/lib/adapters/native_catalog.lua",
+      "sha256": "2b5f89deedec7e66d33436ee60a04fe063a21cd6bf4249811473d0c057ba216d"
+    },
+    {
+      "source": "src/adapters/native_choices.lua",
+      "target": "Scripts/lib/adapters/native_choices.lua",
+      "sha256": "e159105a3840003e6e945cf5a4508a5d851dbb9e669d8fa470fb9ca05ad5fa29"
+    },
+    {
+      "source": "src/adapters/native_click_latch.lua",
+      "target": "Scripts/lib/adapters/native_click_latch.lua",
+      "sha256": "07cd4584798f4d1e62b898ca19f9de69e00226b55c4beee65f99f89839b640dc"
+    },
+    {
+      "source": "src/adapters/native_context.lua",
+      "target": "Scripts/lib/adapters/native_context.lua",
+      "sha256": "94183befc68b1baeb168f7b93d3bfba39eae1b648872fcfb1e50cd8ac93e05f3"
+    },
+    {
+      "source": "src/adapters/native_equipment_state.lua",
+      "target": "Scripts/lib/adapters/native_equipment_state.lua",
+      "sha256": "44f7f7364c77f95a00c371351dc3707b17e68019c3a039a96811fa2b1237ab38"
+    },
+    {
+      "source": "src/adapters/native_event_service.lua",
+      "target": "Scripts/lib/adapters/native_event_service.lua",
+      "sha256": "8cd337328277d2f211e99e73441efd789814a81bc510ec56a47e638864b74857"
+    },
+    {
+      "source": "src/adapters/native_flow_graph.lua",
+      "target": "Scripts/lib/adapters/native_flow_graph.lua",
+      "sha256": "bb7e6fddffcde0484b7483e08e8a455809f2d76dda72eddfe482f13651c81818"
+    },
+    {
+      "source": "src/adapters/native_flow_index.lua",
+      "target": "Scripts/lib/adapters/native_flow_index.lua",
+      "sha256": "c73edc600a8b7639a75b50409ca8ca32cf5e2993db5098a35bd56e6606005719"
+    },
+    {
+      "source": "src/adapters/native_flower_counting.lua",
+      "target": "Scripts/lib/adapters/native_flower_counting.lua",
+      "sha256": "aa973b1ae4e42729d797c6fe555edb91384acc6b0667866b9633ed20a321c007"
+    },
+    {
+      "source": "src/adapters/native_hover.lua",
+      "target": "Scripts/lib/adapters/native_hover.lua",
+      "sha256": "3f5eb26b6d297d140c577340f68db58d99f12823d92a79c877bb6693e21a0a9b"
+    },
+    {
+      "source": "src/adapters/native_item_requirement.lua",
+      "target": "Scripts/lib/adapters/native_item_requirement.lua",
+      "sha256": "a7ca7053c7e72ddc09e01c874f97c886c3882cf4d7f0ba0116a0658f20403dc7"
+    },
+    {
+      "source": "src/adapters/native_lock_info.lua",
+      "target": "Scripts/lib/adapters/native_lock_info.lua",
+      "sha256": "73fa0e34286aa5504d2d04b9ad7ed4bb8c3cb3d66a88620024663486d52b97c6"
+    },
+    {
+      "source": "src/adapters/native_loot.lua",
+      "target": "Scripts/lib/adapters/native_loot.lua",
+      "sha256": "868f18ef10b7e678546480c7505e57be4d8f68220682c910c77c4a889fdbe086"
+    },
+    {
+      "source": "src/adapters/native_map_unlocks.lua",
+      "target": "Scripts/lib/adapters/native_map_unlocks.lua",
+      "sha256": "137ac43077e72a7d5f5ec51c92ebfe901a750c450ae373fb4ee92a60241aeb2b"
+    },
+    {
+      "source": "src/adapters/native_narration.lua",
+      "target": "Scripts/lib/adapters/native_narration.lua",
+      "sha256": "86e68c89be67897688ea48b261a83c31db3430a1f102a28441392207dc52354d"
+    },
+    {
+      "source": "src/adapters/native_navigation.lua",
+      "target": "Scripts/lib/adapters/native_navigation.lua",
+      "sha256": "c86c3852a6915aac7373797ff34589ca5f987f447f8c758003591c4a6a10d916"
+    },
+    {
+      "source": "src/adapters/native_pickup_source.lua",
+      "target": "Scripts/lib/adapters/native_pickup_source.lua",
+      "sha256": "43e425b4caa4af750f74beda683cc1a1d497b98a193488527192f7c54587cc32"
+    },
+    {
+      "source": "src/adapters/native_pointer.lua",
+      "target": "Scripts/lib/adapters/native_pointer.lua",
+      "sha256": "c69d182a6ede9944fb3c060e42e0daf6fea897000625b98052779b4cc8ccb103"
+    },
+    {
+      "source": "src/adapters/native_quest_branches.lua",
+      "target": "Scripts/lib/adapters/native_quest_branches.lua",
+      "sha256": "b089bf6f33c85c2078d74b859aafa8a8fb844208dea41df8ddc8f0f139682c6a"
+    },
+    {
+      "source": "src/adapters/native_quest_state.lua",
+      "target": "Scripts/lib/adapters/native_quest_state.lua",
+      "sha256": "3ad73134fd32de779b2fd732af5336ad68adc78ed00bea090261607876ffd82a"
+    },
+    {
+      "source": "src/adapters/native_snapshot.lua",
+      "target": "Scripts/lib/adapters/native_snapshot.lua",
+      "sha256": "28cc7c24c07c26e2c9a27455c41a55fb497aafddb23357d041adf718f485faa7"
+    },
+    {
+      "source": "src/adapters/native_source_discovery.lua",
+      "target": "Scripts/lib/adapters/native_source_discovery.lua",
+      "sha256": "f9971dd13be01ceae19e735ce402941ff9496253ceb42b3b8bd96b8778615a26"
+    },
+    {
+      "source": "src/adapters/native_source_layer.lua",
+      "target": "Scripts/lib/adapters/native_source_layer.lua",
+      "sha256": "8402c8ff464e301e314e062f67189cd212b2a521f51e2b1f6ce021407c9bcc56"
+    },
+    {
+      "source": "src/adapters/native_tag_branches.lua",
+      "target": "Scripts/lib/adapters/native_tag_branches.lua",
+      "sha256": "51a46ad71a08be6a0e8f903903f3d2eef992f80c59fba16da8211bc3d03ecff6"
+    },
+    {
+      "source": "src/adapters/native_tag_state.lua",
+      "target": "Scripts/lib/adapters/native_tag_state.lua",
+      "sha256": "6d68126f118e6f370912c7d63225ad152365f020f69edd7c32b08452e8f10966"
+    },
+    {
+      "source": "src/adapters/panel_preferences.lua",
+      "target": "Scripts/lib/adapters/panel_preferences.lua",
+      "sha256": "44b58a56480c1c31d514500290df5b843f4ab2f24a6899117bc95194cccb52ee"
+    },
+    {
+      "source": "src/data/pinyin_map.lua",
+      "target": "Scripts/lib/data/pinyin_map.lua",
+      "sha256": "9bc62d456a7c863652e2d596d8cb22381df00a6c3bd9de69901f873760f173b0"
+    },
+    {
+      "source": "src/model/choice_binding.lua",
+      "target": "Scripts/lib/model/choice_binding.lua",
+      "sha256": "99e7a460730acb7e2d3016767cafdb97cef503b3cc6d0bc380954c8cd7162513"
+    },
+    {
+      "source": "src/model/collection_layout.lua",
+      "target": "Scripts/lib/model/collection_layout.lua",
+      "sha256": "b0df7c9ce301a307c9239d8865130b84b460cd42b57f1c551309ce57b27e5e2c"
+    },
+    {
+      "source": "src/model/collection_loader.lua",
+      "target": "Scripts/lib/model/collection_loader.lua",
+      "sha256": "8345f25f8918ef74ddccd322d521c519e7d39ed4174e37aa482b8d63da2c0206"
+    },
+    {
+      "source": "src/model/collection.lua",
+      "target": "Scripts/lib/model/collection.lua",
+      "sha256": "b6c169a3948ce5e9b9573789013839b9116f51d25b48c66b1538535eef9da66a"
+    },
+    {
+      "source": "src/model/condition_state.lua",
+      "target": "Scripts/lib/model/condition_state.lua",
+      "sha256": "56eec193d23c85080f9be7846dc4757179126366065643c8f255f743ccacc3c7"
+    },
+    {
+      "source": "src/model/flow_evidence.lua",
+      "target": "Scripts/lib/model/flow_evidence.lua",
+      "sha256": "cb577ca8ff4e59b4203561a4533a402bfb3cc595c7076abfaaff6d4e2e1dfa54"
+    },
+    {
+      "source": "src/model/guide_presentation.lua",
+      "target": "Scripts/lib/model/guide_presentation.lua",
+      "sha256": "ada0040faced66e652b77f6a51c5637db38234bbbe18e8d9ad74e5bb13dd7ba1"
+    },
+    {
+      "source": "src/model/guide_target.lua",
+      "target": "Scripts/lib/model/guide_target.lua",
+      "sha256": "c3cba02489dca56a8d215881ba1e1f5e329edaafc6f27f923067bc681e3652c7"
+    },
+    {
+      "source": "src/model/map_geometry.lua",
+      "target": "Scripts/lib/model/map_geometry.lua",
+      "sha256": "3683b8e828e59811010d4fe10a98d75562b28d18944f38dbe36b0b0602f7b47c"
+    },
+    {
+      "source": "src/model/map_navigation.lua",
+      "target": "Scripts/lib/model/map_navigation.lua",
+      "sha256": "3552aa2933d959634bd0dc43546c0251ca71ede5a74d67948d7dbca8b01db612"
+    },
+    {
+      "source": "src/model/marker_points.lua",
+      "target": "Scripts/lib/model/marker_points.lua",
+      "sha256": "149d7730545cb5899a2a5879c59c9f545838069a30323009c6849f7b1cfc7159"
+    },
+    {
+      "source": "src/model/nearest.lua",
+      "target": "Scripts/lib/model/nearest.lua",
+      "sha256": "90255df535c4d06346ea23c49545072c0ee594971aede4486695f26443521510"
+    },
+    {
+      "source": "src/model/panel_position.lua",
+      "target": "Scripts/lib/model/panel_position.lua",
+      "sha256": "9842cb33a7447dc3b95ab15157bcba50db08f6dc0dcf359c71fe23a6b4452c0e"
+    },
+    {
+      "source": "src/model/pinyin_search.lua",
+      "target": "Scripts/lib/model/pinyin_search.lua",
+      "sha256": "24de68d645bd1984c1eaf4552d0b9e64480efed67ff2a08045feabdcc2522699"
+    },
+    {
+      "source": "src/model/prerequisites.lua",
+      "target": "Scripts/lib/model/prerequisites.lua",
+      "sha256": "e57083bc1eadae2f6060562b6668ee52a521837de3ee68b47be535a4113bc0b2"
+    },
+    {
+      "source": "src/model/progress.lua",
+      "target": "Scripts/lib/model/progress.lua",
+      "sha256": "4d2c23c13278c345eabefb0faf7cd793d9776cde9a96c46fe21058bc20093afd"
+    },
+    {
+      "source": "src/model/rules.lua",
+      "target": "Scripts/lib/model/rules.lua",
+      "sha256": "c8424ccbce00188536c784f5ae7ab3de9d22f722e4a81dc00f3ab15d3ffd8936"
+    },
+    {
+      "source": "src/model/source_hints.lua",
+      "target": "Scripts/lib/model/source_hints.lua",
+      "sha256": "a918f8713c0f93fd3d13c18f17b0096632cd650fbbab94a4ea342ceeb9457b15"
+    },
+    {
+      "source": "src/model/source_index.lua",
+      "target": "Scripts/lib/model/source_index.lua",
+      "sha256": "5b646c70b40d0492c24f6f9234c2f078640a2c6d387fdec53f503691beba214a"
+    },
+    {
+      "source": "src/runtime/bootstrap.lua",
+      "target": "Scripts/lib/runtime/bootstrap.lua",
+      "sha256": "209a4737d99207693f810e02854ce733d46955be980b8e4501fa2865d27e75d9"
+    },
+    {
+      "source": "src/runtime/native_candidate.lua",
+      "target": "Scripts/lib/runtime/native_candidate.lua",
+      "sha256": "7b8f9c43eacea64fafd22266f29141dec72b8860d6023e05245c059202ec3636"
+    },
+    {
+      "source": "src/views/acquisition_panel.lua",
+      "target": "Scripts/lib/views/acquisition_panel.lua",
+      "sha256": "2d9d96c77d6b8ede5bd3b6ca5a35e484b4924a6036bf09d08c4100ef90d80219"
+    },
+    {
+      "source": "src/views/collection_panel.lua",
+      "target": "Scripts/lib/views/collection_panel.lua",
+      "sha256": "6172494ae16c43cf06f873f29b0fecffc400dff63589282e98968676ba50eb51"
+    },
+    {
+      "source": "src/views/ink_theme.lua",
+      "target": "Scripts/lib/views/ink_theme.lua",
+      "sha256": "fc469237c1ded7757d2976684f2eb53be4d8a0e15e9cd014e7195bd2b556891d"
+    },
+    {
+      "source": "src/views/source_markers.lua",
+      "target": "Scripts/lib/views/source_markers.lua",
+      "sha256": "67366fbd490d27d049920a8958cd2e28a0d8d79a042fd234d08ec9ed59e27633"
+    },
+    {
+      "source": "mod/Scripts/main.lua",
+      "target": "Scripts/main.lua",
+      "sha256": "be05c4f2ce52c40d254aed5639e743497ff408b9b87cfa520fc9d63f3b40d71d"
+    }
+  ],
+  "contentHash": "5617e0b867d66e0fa9079b1e9d9b2159e3a1150e06e79e464be81779657759b5"
+}
