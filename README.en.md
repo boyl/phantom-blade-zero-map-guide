@@ -1,6 +1,6 @@
 # Phantom Blade Zero Map Acquisition Guide
 
-[简体中文](README.md) · Version 0.4.1 stable release
+[简体中文](README.md) · Version 0.4.2 stable release
 
 A read-only map guide and searchable collection checklist for the PC Steam version of Phantom Blade Zero.
 
@@ -66,7 +66,7 @@ Run `UNINSTALL.cmd` to remove hash-matching Mod-owned files and its enable line.
 - Full quest prerequisites, earliest obtainable chapters, automatic routes and panel dragging are deferred. Unknown conditions remain explicitly unverified. The separate map preview is not included.
 - Collection status and location completion are distinct. Absence of a consumed item is not proof that its location is incomplete.
 - Controller operation, future game patches and actual UAC elevation have not completed acceptance testing.
-- Version 0.4.1 has passed automated tests, installation verification and in-game acceptance.
+- Version 0.4.2 has passed automated tests, installation verification and in-game acceptance.
 
 ## License
 

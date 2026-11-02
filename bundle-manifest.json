@@ -1,7 +1,7 @@
 {
   "format": 1,
-  "bundleHash": "94be43752dc6bdb5508ecf35e27160a720d36b12636312bb4e0f808f37dd16a9",
-  "payloadHash": "f42b86737a4c55f386510cb0871a42421c92c7f8d7608f21cb9c2596efca6c23",
+  "bundleHash": "08ca09861ee8f8476445325b5fafd0ae415fe8ce8566b32f49199d13642608d3",
+  "payloadHash": "a0af54d178e9850eb0dd882da5aa942b1bd900b55ba84f6188fcfc18f7b34cae",
   "files": [
     {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/acquisition_service.lua",
@@ -161,7 +161,7 @@
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/model/localization.lua",
-      "sha256": "e42144747550ee84c9fe0deeee6c44d9b8c70a6fc3a238164d5a2859ae38559d"
+      "sha256": "0d2e75999b6429da0ad01e45ed00e74e0e5ebb417f12d5cf3569b6a17fc0819d"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/model/map_geometry.lua",
@@ -221,7 +221,7 @@
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/views/collection_panel.lua",
-      "sha256": "001b29326bd6d90a1f0a83d6f8f73086bd5e7d160d30cd51adcb790a6de4fe77"
+      "sha256": "4237618cbf81934011ae2b395b61f7359f78edf4b99dbedd6c21128b5ab5fc6a"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/views/ink_theme.lua",
@@ -237,7 +237,7 @@
     },
     {
       "name": "manifest.json",
-      "sha256": "1d81e5019c7b155e4a0c20338be651c115fbb6d806d168aeae30fee8e1aaaeda"
+      "sha256": "57f267521f2cace4f9bd3d4ccecc9ca8bec2797f0e84693a2aac877c0f62687e"
     },
     {
       "name": "install.ps1",
@@ -253,11 +253,11 @@
     },
     {
       "name": "README.md",
-      "sha256": "886a32de9d612b482c284339265bc1659c011505e081c0ad2fe8a7b71991d6df"
+      "sha256": "96367202db66b8acf4fe92283b5d4db9e32024d3fc52b3d587abc2fec45703f1"
     },
     {
       "name": "README.en.md",
-      "sha256": "07c45a93994a9dbcddb5d543c4a79e6210d35fe48c5e78be5229371e2472eb91"
+      "sha256": "d25a638f3baa632f1d6168720f4a8a15508701539872865cc9de1df11cb6dcf0"
     },
     {
       "name": "LICENSE",
