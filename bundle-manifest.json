@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "bundleHash": "821723952bc82f375b21f2ef0a485897f78d94eb1b03dfdb74f3729ca67ef8d5",
+  "bundleHash": "94be43752dc6bdb5508ecf35e27160a720d36b12636312bb4e0f808f37dd16a9",
   "payloadHash": "f42b86737a4c55f386510cb0871a42421c92c7f8d7608f21cb9c2596efca6c23",
   "files": [
     {
@@ -253,11 +253,11 @@
     },
     {
       "name": "README.md",
-      "sha256": "81095da3c3ff0103dec577fb87460bcf347edf1f93cb37f1903321f67cf60c60"
+      "sha256": "886a32de9d612b482c284339265bc1659c011505e081c0ad2fe8a7b71991d6df"
     },
     {
       "name": "README.en.md",
-      "sha256": "61d5a8805bd65940ec5baa9095ce20b8d99c4dc0abdd4d1432ecf1db1c3af821"
+      "sha256": "07c45a93994a9dbcddb5d543c4a79e6210d35fe48c5e78be5229371e2472eb91"
     },
     {
       "name": "LICENSE",
