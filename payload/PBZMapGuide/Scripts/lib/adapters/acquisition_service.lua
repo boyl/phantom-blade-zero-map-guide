@@ -85,14 +85,23 @@ function Service:describe(category,itemId)
  return self:format(context,category..'/'..itemId:lower(),title,sources,category=='phantom_edge' and t('需要影之武装：') or nil)
 end
 function Service:record(record)
+ if record.catalog_only then
+  local category=readers[record.category]and record.category or'inventory'
+  local info=self:describe(category,record.item_id)
+  info.catalog_only=true;info.catalog_record=record
+  if category=='inventory'then
+   info.description=self:localize(self.context().backpack:GetPropData(FName(record.item_id)).ItemDescription)
+  end
+  return info
+ end
  local context=self.context()
  local identity=record
  if self.index.resolveIdentity then identity=self.index:resolveIdentity(record)end
- local title=labels[record.category]or t('收集品')
+ local title=t(labels[record.category]or'收集品')
  if identity then
   local reader=readers[identity.category]or readers.inventory
   local id=readers[identity.category] and identity.item_id or identity.inventory_id
-  if id then title=self:localize(reader(context.backpack,id))or title end
+  if id then title=self:localize(reader(context.backpack,id))or(id..t('（名称待核实）'))end
  else title=title..t('（类型尚未核实）')end
  local p=record.world
  return self:format(context,table.concat({record.category,record.map_id,p.x,p.y,p.z},'/'),title,{record})
@@ -100,16 +109,17 @@ end
 function Service:summary(record,context,cache)
  local identity=record
  if self.index.resolveIdentity then identity=self.index:resolveIdentity(record)end
- local title=labels[record.category]or t('收集品')
+ local title=t(labels[record.category]or'收集品')
  if identity then
   local category=readers[identity.category]and identity.category or'inventory'
   local id=readers[identity.category]and identity.item_id or identity.inventory_id
   if id then
    local key=category..'/'..id:lower()
-   if not cache.names[key]then cache.names[key]=self:localize(readers[category](context.backpack,id))or title end
+   if not cache.names[key]then cache.names[key]=self:localize(readers[category](context.backpack,id))or(id..t('（名称待核实）'))end
    title=cache.names[key]
   end
  else title=title..t('（类型尚未核实）')end
+ if record.catalog_only then return{title=title,regions={t('无地图来源')},text='',lightweight=true}end
  local mapId=record.map_id:lower()
  if not cache.regions[mapId]then cache.regions[mapId]=self:localize(context.bell:GetMapData(FName(record.map_id)).MapName)or(record.map_id..t('（名称待核实）'))end
  return{title=title,regions={cache.regions[mapId]},text=cache.regions[mapId],lightweight=true}

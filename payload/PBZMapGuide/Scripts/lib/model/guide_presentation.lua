@@ -35,6 +35,7 @@ local function branchCaption(group)
 end
 function P.brief(info)
  local lines={info.title or t('获取指引')};local chapters,bells={},{}
+ if info.catalog_only and #(info.sources or{})==0 then lines[#lines+1]=t('地图来源：原生地图表未收录')end
  for i in ipairs(info.sources or{})do
   local value=(info.region_chapters or{})[i]
   if value and type(value.order)=='number'then
@@ -50,6 +51,11 @@ function P.brief(info)
 end
 function P.details(info,counts,checks,events,objects,route)
  local lines={}
+ if info.catalog_only then
+  lines[#lines+1]=t('地图来源：原生地图表未收录')
+  lines[#lines+1]=t('定义存在不代表当前可获取。')
+ end
+ if info.description and info.description~=''then lines[#lines+1]=t('游戏内物品说明：')..info.description end
  local origins,seenOrigins={},{}
  for _,source in ipairs(info.sources or{})do
   for _,kind in ipairs({{source.pickup_id,t('场景交互点')},{source.mob_domain,t('战斗奖励点')}})do

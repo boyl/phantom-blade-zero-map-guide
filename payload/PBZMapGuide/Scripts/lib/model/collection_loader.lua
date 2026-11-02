@@ -3,7 +3,7 @@ local Loader={};Loader.__index=Loader
 function Loader.new(deps)
  local batch=deps.batch or 24
  assert(batch>=1 and batch<=64 and batch%1==0,'invalid collection preparation batch')
- return setmetatable({deps=deps,batch=batch,prepared={},processed=0,total=#deps.records,version=0,status='preparing'},Loader)
+ return setmetatable({deps=deps,batch=batch,prepared={},processed=0,total=#deps.records,version=0,status='preparing',failed=0},Loader)
 end
 function Loader:request()
  self.requested=true;self.rows=nil
@@ -17,11 +17,19 @@ function Loader:step()
    if self.processed==0 and self.deps.report then self.deps.report('Collection metadata begin')end
    local context=self.deps.context()
    local last=math.min(self.total,self.processed+self.batch)
-   for i=self.processed+1,last do self.prepared[i]=self.deps.prepare(self.deps.records[i],i,context)end
+   for i=self.processed+1,last do
+    local success,value=pcall(self.deps.prepare,self.deps.records[i],i,context)
+    if success then self.prepared[i]=value
+    elseif self.deps.fallback then
+     self.prepared[i]=self.deps.fallback(self.deps.records[i],i)
+     self.failed=self.failed+1
+     if self.deps.report then self.deps.report('Collection record '..i..' unavailable: '..tostring(value))end
+    else error(value)end
+   end
    self.processed=last
    if last==self.total then
     self.status='ready'
-    if self.deps.report then self.deps.report('Collection metadata ready rows='..self.total)end
+    if self.deps.report then self.deps.report('Collection metadata ready rows='..self.total..' unavailable='..self.failed)end
    end
   else self.status='ready'end
   if self.status=='ready'and self.requested then

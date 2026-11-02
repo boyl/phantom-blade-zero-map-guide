@@ -1,6 +1,6 @@
 # Phantom Blade Zero Map Acquisition Guide
 
-[简体中文](README.md) · Version 0.4.3 stable release
+[简体中文](README.md) · Version 0.4.4 stable release
 
 A read-only map guide and searchable collection checklist for the PC Steam version of Phantom Blade Zero.
 
@@ -14,7 +14,7 @@ A read-only map guide and searchable collection checklist for the PC Steam versi
 - Item, region, bell and quest names use the game's own localization. The Mod does not invent translations for missing native text.
 - Only native game information is used. No community walkthrough data is included. Inventory, quests, achievements and save progress are not modified.
 
-The catalog contains 530 map records across 12 categories; this is not a unique-item count or a claim of complete game coverage. Source region chapter does not mean the earliest obtainable chapter. Nearby bells are selected by straight-line distance, not a verified walkable route.
+The checklist merges native map records with five item definition tables. The current audit preserves 530 map records and adds 189 unmapped definitions, for 719 entries. Unmapped items are searchable and show native descriptions, but unknown chapters, bells and coordinates remain unknown; no automatic location is attempted. A definition is not proof of obtainability. Inventory absence after consumption does not imply a missing collectible. Counts vary with game data and are not unique-item counts or a claim of complete game coverage. Source region chapter does not mean the earliest obtainable chapter. Nearby bells are selected by straight-line distance, not a verified walkable route.
 
 ## Requirements
 
@@ -66,7 +66,7 @@ Run `UNINSTALL.cmd` to remove hash-matching Mod-owned files and its enable line.
 - Full quest prerequisites, earliest obtainable chapters, automatic routes and panel dragging are deferred. Unknown conditions remain explicitly unverified. The separate map preview is not included.
 - Collection status and location completion are distinct. Absence of a consumed item is not proof that its location is incomplete.
 - Controller operation, future game patches and actual UAC elevation have not completed acceptance testing.
-- Version 0.4.3 has passed automated tests, installation verification and in-game acceptance.
+- Version 0.4.4 has passed automated tests, installation verification and in-game acceptance.
 
 ## License
 

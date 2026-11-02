@@ -1,14 +1,24 @@
 -- Completion is a fresh read-only snapshot, independent of accessibility.
 local Progress={}
 local cycleCategories={weapon=true,phantom_edge=true,accessory=true,medicine=true,memory_flower=true}
-function Progress.scope(record)return cycleCategories[record.category]and'item_cycle'or'location'end
+function Progress.scope(record)return(record.catalog_only or cycleCategories[record.category])and'item_cycle'or'location'end
 function Progress.countable(record,snapshot)
  return not(record.category=='memory_flower'and record.item_id and(snapshot.flower_countable or{})[record.item_id:lower()]==false)
 end
 function Progress.completion(record,snapshot)
+ if record.catalog_only then
+  local category=cycleCategories[record.category]and record.category or'inventory'
+  if snapshot.ready[category] and snapshot.cycle~=nil then
+   local acquired=(snapshot.acquired[category]or{})[(record.inventory_id or record.item_id):lower()]
+   if acquired==snapshot.cycle then return'collected'end
+  end
+  -- A consumed quest item disappearing from inventory is not proof of non-acquisition.
+  return'unknown'
+ end
  if cycleCategories[record.category]then
   if not snapshot.ready[record.category] or snapshot.cycle==nil or not record.item_id then return 'unknown'end
   local acquired=snapshot.acquired[record.category][record.item_id:lower()]
+  if acquired==nil and(snapshot.partial or{})[record.category]then return'unknown'end
   return acquired==snapshot.cycle and 'collected' or 'missing'
  end
  local present,unknown=false,false

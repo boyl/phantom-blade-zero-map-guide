@@ -13,7 +13,8 @@ function P.evaluate(guidance,snapshot,readName)
     if snapshot.ready[check.category] and owned and readName(check.category,check.id)==check.title then
      local value=owned[check.id:lower()]
      assert(value==nil or value==true,'ownership map must contain present keys only')
-     state=value and'owned'or'missing'
+     if value then state='owned'
+     elseif not(snapshot.partial or{})[check.category]then state='missing'end
     end
     result[#result+1]={category=check.category,id=check.id,title=check.title,state=state}
    end

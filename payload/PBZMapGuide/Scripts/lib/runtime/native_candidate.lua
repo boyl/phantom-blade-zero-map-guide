@@ -84,6 +84,13 @@ function Runtime.start(root,options)
  local FlowEvidence=dofile(root..'model/flow_evidence.lua')
  local EventService=dofile(root..'adapters/native_event_service.lua')
  local records,_,bells=Catalog.read(StaticFindObject('/Game/PBZContent/Maps/DT_MapItemData.DT_MapItemData'))
+ local Definitions=dofile(root..'adapters/native_definitions.lua')
+ local definitionData=Definitions.read({load=LoadAsset,find=StaticFindObject})
+ local collectionRecords,coverage=dofile(root..'model/catalog_merge.lua').combine(records,definitionData.items)
+ print(string.format('[PBZMapGuide] Catalog coverage status=%s map_records=%d definitions=%d additional=%d\n',definitionData.status,#records,#definitionData.items,coverage.added))
+ for _,tableState in ipairs(definitionData.tables)do
+  if tableState.status~='read'then print('[PBZMapGuide] Definition table '..tableState.namespace..' '..tableState.status..' failed='..tableState.failed..' '..(tableState.reason or'')..'\n')end
+ end
  local MapUnlocks=dofile(root..'adapters/native_map_unlocks.lua')
  local service=Service.new({index=Index.build(records),context=Context.get,bells=bells,nearest=Nearest.bell,read_unlocks=function(bell)return MapUnlocks.read(bell,FName)end,
   resolve_text=function(text)return Language.resolve(text,StaticFindObject)end})
@@ -94,7 +101,7 @@ function Runtime.start(root,options)
   mapSystem=function()return Context.one('MapSubsystem')end}
  deps.sourceLayer=function(map)return SourceLayer.create(map,deps)end
  deps.fold=function(value)return StaticFindObject('/Script/Engine.Default__KismetTextLibrary'):TextToLower(FText(tostring(value or''))):ToString():gsub('%s+',' '):match('^%s*(.-)%s*$')end
- local state={active=true,target=previousTarget}
+ local state={active=true,target=previousTarget,catalogCoverage=coverage,definitionStatus=definitionData.status}
  deps.positionModel=Position;deps.preferences=Preferences.new(root..'../../panel-position.txt')
  deps.guideBounds=function()return state.panel and state.panel.bounds end
  deps.pointer=function(map,needsPosition)return Pointer.read(map,deps.layout(),FName,needsPosition)end
@@ -227,8 +234,9 @@ function Runtime.start(root,options)
  end
  local function readDetails(info)
   questStates={};questStateCount=0
-  local snapshot=readSnapshot(info.sources)
-  local counts=Progress.summary(info.sources,snapshot)
+  local progressRecords=info.catalog_record and{info.catalog_record}or info.sources
+  local snapshot=readSnapshot(progressRecords)
+  local counts=Progress.summary(progressRecords,snapshot)
   local checks=Prerequisites.evaluate({{checks=info.required_weapons}},snapshot,function(category,id)return service:readName(category,id)end)
   local eventOk,eventData=pcall(nativeEvents.read,nativeEvents,info.sources,info.required_items,snapshot.cycle)
   if not eventOk then print('[PBZMapGuide] Native event details unavailable: '..tostring(eventData)..'\n')end
@@ -253,7 +261,7 @@ function Runtime.start(root,options)
   hoverController:reset()
   print('[PBZMapGuide] Rendering '..info.title..' on '..map.CurrentDisplayMapID:ToString()..'\n')
   trace('show_sources');local drawn,other=markers:show(map,info,Map.allowed(map),navigate)
-  trace('read_progress');state.targetDetails=readDetails(info)
+  trace('read_progress');state.targetDetails=info.metadata_unavailable and t('该条目原生信息读取失败，暂不提供定位。')or readDetails(info)
   state.panel:set(Presentation.brief(info),state.targetDetails)
   state.shownKey=info.key
   if navigate and options.navigation then
@@ -264,9 +272,12 @@ function Runtime.start(root,options)
   print('[PBZMapGuide] Confirmed '..info.title..' current='..drawn..' other='..other..'\n')
  end
  local function selectedInfo(map)
-  return Map.selection(map,records,LockInfo,{service=service,
+  local ok,info=pcall(Map.selection,map,records,LockInfo,{service=service,
    switch_class=StaticFindObject('/Script/ProjectPBZ.SwitchLockObject'),
    find_lock=function(mapId,id)return Context.one('MapSubsystem'):FindTrackableLock(mapId,id)end})
+  if ok then state.selectionError=nil;return info end
+  local reason=tostring(info)
+  if reason~=state.selectionError then deps.report('Map point information unavailable: '..reason);state.selectionError=reason end
  end
  hoverController=Hover.new({
   readKey=function(map)return map.SlotWidgetGroup:GetSelectedSlotID():ToString()end,
@@ -299,12 +310,19 @@ function Runtime.start(root,options)
   state.receiver=receiver;receiver:SetVisibility(1);map.MapClickSurface:GetParent():AddChild(receiver)
   state.unbind=events:bindClick(map.MapClickSurface,receiver,function()click(map)end)
   local metadata={names={},regions={}}
-  local loader=CollectionLoader.new({records=records,context=Context.get,report=deps.report,
+  local function unavailable(record)
+   return{key='unavailable/'..record.category..'/'..(record.item_id or record.pickup_id or record.map_id or''),
+    title=record.item_id or record.inventory_id or t('条目信息暂不可用'),regions={t('条目信息暂不可用')},sources={},metadata_unavailable=true}
+  end
+  local loader=CollectionLoader.new({records=collectionRecords,context=Context.get,report=deps.report,
    prepare=function(record,key,context)return Collection.prepare(record,key,service:summary(record,context,metadata),deps.fold,Pinyin)end,
-   snapshot=function()return readSnapshot(records)end,
+   fallback=function(record,key)return Collection.prepare(record,key,unavailable(record),deps.fold,Pinyin)end,
+   snapshot=function()return readSnapshot(collectionRecords)end,
    refresh=function(prepared,snapshot)return Collection.refresh(prepared,snapshot,Progress.completion,function(record,snap)return Rules.evaluate(record.requirements,snap.facts or{})end,Progress.countable)end})
-  local ok,collection=pcall(CollectionView.new,deps,map,events,Collection,CollectionLayout,loader,function(_,record)
-   local info=service:record(record);state.target=Target.reduce(state.target,{kind='select',info=info});display(map,info,'collection')
+  local ok,collection=pcall(CollectionView.new,deps,map,events,Collection,CollectionLayout,loader,function(summary,record)
+   local read,info=pcall(service.record,service,record)
+   if not read then deps.report('Collection item information unavailable: '..tostring(info));info=unavailable(record)end
+   state.target=Target.reduce(state.target,{kind='select',info=info});display(map,info,'collection')
   end)
   if ok then state.collection=collection else print('[PBZMapGuide] Collection UI unavailable: '..tostring(collection)..'\n')end
   if state.target then display(map,state.target)end
@@ -334,7 +352,7 @@ function Runtime.start(root,options)
    sourceVersion=sourceDiscovery.state.version
    print(string.format('[PBZMapGuide] Native source discovery %s read=%d failed=%d\n',sourceDiscovery.state.status,sourceDiscovery.state.read,sourceDiscovery.state.failed))
    if state.target and state.panel then
-    state.targetDetails=readDetails(state.target)
+    state.targetDetails=state.target.metadata_unavailable and t('该条目原生信息读取失败，暂不提供定位。')or readDetails(state.target)
     if state.shownKey==state.target.key then state.panel:updateDetail(state.targetDetails)end
    end
   end

@@ -2,7 +2,7 @@
 local Snapshot={}
 local fields={weapon='MainWeaponInfos',phantom_edge='ShaqiWeaponInfos',accessory='Accessories',medicine='MedicineInfos',memory_flower='Inventories'}
 function Snapshot.read(records,context,name)
- local result={ready={},acquired={},owned={weapon={},phantom_edge={}},actor_saved={},mob_awards={},executed_nodes={},errors={}}
+ local result={ready={},partial={},acquired={},owned={weapon={},phantom_edge={}},actor_saved={},mob_awards={},executed_nodes={},errors={}}
  local function read(key,fn)
   local ok,value=pcall(fn)
   if ok then return value,true end
@@ -21,21 +21,31 @@ function Snapshot.read(records,context,name)
    local values,ok=read('inventory/'..category,function()
     local rows={}
     context.backpack[field]:ForEach(function(key,value)
-     rows[#rows+1]={id=key:get():ToString():lower(),cycle=value:get().AcquiredCycle}
+     local cycle=value:get().AcquiredCycle
+     rows[#rows+1]={id=key:get():ToString():lower(),cycle=type(cycle)=='number'and cycle or nil}
     end)
-    local acquired={}
+    local acquired,present,invalid={},{},{}
     for _,row in ipairs(rows)do
-     assert(type(row.cycle)=='number'and row.cycle%1==0,'invalid acquisition cycle')
-     acquired[row.id]=row.cycle
+     if row.id==''or row.id=='none'then invalid[#invalid+1]='invalid_id'
+     else
+      present[row.id]=true
+      if type(row.cycle)=='number'and row.cycle>=0 and row.cycle%1==0 then acquired[row.id]=row.cycle
+      else invalid[#invalid+1]=row.id end
+     end
     end
-    return acquired
+    return{acquired=acquired,present=present,invalid=invalid}
    end)
    if ok then
-    result.acquired[category]=values;result.ready[category]=true
-    if result.owned[category]then for id in pairs(values)do result.owned[category][id]=true end end
+    result.acquired[category]=values.acquired;result.ready[category]=true
+    result.partial[category]=#values.invalid>0
+    for _,id in ipairs(values.invalid)do result.errors['inventory/'..category..'/'..id]='invalid acquisition record'end
+    if result.owned[category]then result.owned[category]=values.present end
    end
   end
  end
+ result.ready.inventory=result.ready.memory_flower
+ result.acquired.inventory=result.acquired.memory_flower
+ result.partial.inventory=result.partial.memory_flower
  local executed
  if context.events then executed=read('executed_nodes',function()
   local values={};context.events.ExecuteNodeGuid:ForEach(function(key)values[key:get():ToString():lower()]=true end)

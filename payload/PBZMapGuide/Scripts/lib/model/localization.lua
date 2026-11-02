@@ -1,6 +1,12 @@
 -- Mod-owned strings only. Native names and IDs never pass through this catalog.
 local I18n={}
 local english={
+ ['无地图来源']='No mapped source',
+ ['地图来源：原生地图表未收录']='Map source: not listed in native map data',
+ ['定义存在不代表当前可获取。']='A definition does not confirm current availability.',
+ ['游戏内物品说明：']='In-game item description: ',
+ ['条目信息暂不可用']='Item data unavailable',
+ ['该条目原生信息读取失败，暂不提供定位。']='Native data for this item could not be read; location unavailable.',
  ['序章']='Prologue',['第']='Chapter ',['章']='',
  ['有记录']='Recorded',['无记录']='Not recorded',['状态待核实']='State unverified',['该来源']='This source: ',
  ['数量足够']='Enough items',['数量不足']='Not enough items',['数量待核实']='Quantity unverified',

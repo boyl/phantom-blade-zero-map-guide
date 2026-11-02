@@ -14,7 +14,8 @@ function Collection.refresh(prepared,snapshot,completion,access,countable)
  for _,row in ipairs(prepared)do
   if not countable or countable(row.record,snapshot)then
    rows[#rows+1]={key=row.key,record=row.record,info=row.info,search=row.search,phonetic=row.phonetic,
-    completion=completion(row.record,snapshot),access=access and access(row.record,snapshot)or'unknown'}
+    completion=row.info.metadata_unavailable and'unknown'or completion(row.record,snapshot),
+    access=not row.info.metadata_unavailable and access and access(row.record,snapshot)or'unknown'}
   end
  end
  return rows
