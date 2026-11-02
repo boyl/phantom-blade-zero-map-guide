@@ -1,13 +1,13 @@
 {
   "format": 1,
   "id": "PBZMapGuide",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "entry": "Scripts/main.lua",
   "files": [
     {
       "source": "src/adapters/acquisition_service.lua",
       "target": "Scripts/lib/adapters/acquisition_service.lua",
-      "sha256": "021843751e82342a37f2774e9e95caac8fe98e87b1e129cce7c6a4aaec980400"
+      "sha256": "a7902c5b2e2d41f591732d49d6f02969dc9cd88a59e61680b7cfcbe0f550d375"
     },
     {
       "source": "src/adapters/live_map.lua",
@@ -92,7 +92,7 @@
     {
       "source": "src/adapters/native_map_unlocks.lua",
       "target": "Scripts/lib/adapters/native_map_unlocks.lua",
-      "sha256": "137ac43077e72a7d5f5ec51c92ebfe901a750c450ae373fb4ee92a60241aeb2b"
+      "sha256": "e49a3c5370f4ccce0b3bae3b99d24dbdf349b524331284d0b64305e2e6e3e06c"
     },
     {
       "source": "src/adapters/native_narration.lua",
@@ -192,7 +192,7 @@
     {
       "source": "src/model/guide_presentation.lua",
       "target": "Scripts/lib/model/guide_presentation.lua",
-      "sha256": "c5561b3dd513776e81e23cce5aa18602e43d8d99d51bdb8bad0249f9d87ce770"
+      "sha256": "210eaaf02c15dcf6fb1f92da5c406476b7452ea32cbf65a7af8684b51fd8cfec"
     },
     {
       "source": "src/model/guide_target.lua",
@@ -295,5 +295,5 @@
       "sha256": "be05c4f2ce52c40d254aed5639e743497ff408b9b87cfa520fc9d63f3b40d71d"
     }
   ],
-  "contentHash": "a0af54d178e9850eb0dd882da5aa942b1bd900b55ba84f6188fcfc18f7b34cae"
+  "contentHash": "4926c9467617a80950673578eeaf948883f083c6183bbab2ffb3e5844008e4b6"
 }

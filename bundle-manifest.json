@@ -1,11 +1,11 @@
 {
   "format": 1,
-  "bundleHash": "08ca09861ee8f8476445325b5fafd0ae415fe8ce8566b32f49199d13642608d3",
-  "payloadHash": "a0af54d178e9850eb0dd882da5aa942b1bd900b55ba84f6188fcfc18f7b34cae",
+  "bundleHash": "5a3d7b3a445892f721948ae740ddac4d853089e301ea5f0e9e9f670e5a453f4b",
+  "payloadHash": "4926c9467617a80950673578eeaf948883f083c6183bbab2ffb3e5844008e4b6",
   "files": [
     {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/acquisition_service.lua",
-      "sha256": "021843751e82342a37f2774e9e95caac8fe98e87b1e129cce7c6a4aaec980400"
+      "sha256": "a7902c5b2e2d41f591732d49d6f02969dc9cd88a59e61680b7cfcbe0f550d375"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/live_map.lua",
@@ -73,7 +73,7 @@
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/native_map_unlocks.lua",
-      "sha256": "137ac43077e72a7d5f5ec51c92ebfe901a750c450ae373fb4ee92a60241aeb2b"
+      "sha256": "e49a3c5370f4ccce0b3bae3b99d24dbdf349b524331284d0b64305e2e6e3e06c"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/adapters/native_narration.lua",
@@ -153,7 +153,7 @@
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/model/guide_presentation.lua",
-      "sha256": "c5561b3dd513776e81e23cce5aa18602e43d8d99d51bdb8bad0249f9d87ce770"
+      "sha256": "210eaaf02c15dcf6fb1f92da5c406476b7452ea32cbf65a7af8684b51fd8cfec"
     },
     {
       "name": "payload/PBZMapGuide/Scripts/lib/model/guide_target.lua",
@@ -237,7 +237,7 @@
     },
     {
       "name": "manifest.json",
-      "sha256": "57f267521f2cace4f9bd3d4ccecc9ca8bec2797f0e84693a2aac877c0f62687e"
+      "sha256": "3875f86b0e9bf2e07584fa4eec7304e0d6af950a8619aa73e3b9367013b4fb06"
     },
     {
       "name": "install.ps1",
@@ -253,11 +253,11 @@
     },
     {
       "name": "README.md",
-      "sha256": "96367202db66b8acf4fe92283b5d4db9e32024d3fc52b3d587abc2fec45703f1"
+      "sha256": "0363c1326d7995cf82a988af2387533159f1f110f3b51254500867730df3793b"
     },
     {
       "name": "README.en.md",
-      "sha256": "d25a638f3baa632f1d6168720f4a8a15508701539872865cc9de1df11cb6dcf0"
+      "sha256": "0090dbdaa30efdd0d23a28dd6e7e5515a553630ed5d1d60bd885bbca0753b18c"
     },
     {
       "name": "LICENSE",

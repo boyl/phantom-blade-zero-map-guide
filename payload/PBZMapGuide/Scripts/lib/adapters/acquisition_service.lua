@@ -43,7 +43,10 @@ function Service:format(context,key,title,sources,prefix)
   info.lines[#info.lines+1]=t('获取来源：当前原生位置表未提供，待核实')
  else
   for i,source in ipairs(sources) do
-   if availability and availability.status=='read'then info.source_map_unlocked[i]=availability.maps[source.map_id:lower()]==true end
+   if availability and(availability.status=='read'or availability.status=='partial')then
+    if availability.maps[source.map_id:lower()]==true then info.source_map_unlocked[i]=true
+    elseif availability.status=='read'then info.source_map_unlocked[i]=false end
+   end
    info.source_titles[i]=title
    local map=context.bell:GetMapData(FName(source.map_id))
    local chapterId=map.OwnChapterID:ToString()

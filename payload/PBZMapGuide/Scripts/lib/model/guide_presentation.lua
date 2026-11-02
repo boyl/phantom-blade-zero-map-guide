@@ -76,7 +76,7 @@ function P.details(info,counts,checks,events,objects,route)
  for _,source in ipairs(info.sources or{})do
   if source.location_status=='unavailable'then lines[#lines+1]=t('精确位置：原生记录未提供可核实坐标');break end
  end
- if info.map_unlock_status=='unavailable'then lines[#lines+1]=t('来源地区解锁：待核实')end
+ if info.map_unlock_status=='unavailable'or info.map_unlock_status=='partial'then lines[#lines+1]=t('来源地区解锁：待核实')end
  lines[#lines+1]=t('最早可取章节：尚待前置条件核实')
  local labels={owned=t('已持有'),missing=t('未持有'),unknown=t('待核实')}
  for _,check in ipairs(checks or{})do lines[#lines+1]=t('此障碍所需：')..check.title..t('（')..labels[check.state]..t('）')end
