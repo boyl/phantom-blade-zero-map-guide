@@ -1,3 +1,5 @@
+[![Downloads](https://img.shields.io/github/downloads/boyl/phantom-blade-zero-map-guide/total?label=Downloads&color=blue)](https://github.com/boyl/phantom-blade-zero-map-guide/releases) [![Stars](https://img.shields.io/github/stars/boyl/phantom-blade-zero-map-guide?label=Stars)](https://github.com/boyl/phantom-blade-zero-map-guide/stargazers) [![Latest Release](https://img.shields.io/github/v/release/boyl/phantom-blade-zero-map-guide?label=Release)](https://github.com/boyl/phantom-blade-zero-map-guide/releases/latest) [![License](https://img.shields.io/github/license/boyl/phantom-blade-zero-map-guide?label=License)](https://github.com/boyl/phantom-blade-zero-map-guide/blob/HEAD/LICENSE)
+
 # 影之刃零地图获取指引
 
 [English](README.en.md) · 当前正式版为 `0.4.4` 中英文核心版：地图简讯、来源位置标记、收集清单与筛选、清单定位。完整任务前置、最早可取章节、自动路线和对白扩展已按要求搁置；实验模块不进入本包，任务及标签条件组的扩展状态查询不启用。
